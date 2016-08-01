@@ -47,12 +47,7 @@ public class TeleportLog extends EventSaver {
 		Location loc = event.getTo();
 		set(loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + loc.getWorld().getName(),
 				TELEPORT_TO);
-		set(event.getCause(), CAUSE);
-	}
-
-	@Override
-	protected String getEventName() {
-		return PlayerTeleportEvent.class.getSimpleName();
+		set(event.getCause().name(), CAUSE);
 	}
 
 }

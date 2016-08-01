@@ -4,6 +4,8 @@ import java.io.File;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ModLog.Listener.Listeners;
+
 public class ModLogPlugin extends JavaPlugin {
 	
 	JavaPlugin PLUGIN;
@@ -13,6 +15,7 @@ public class ModLogPlugin extends JavaPlugin {
 	
 	public void onEnable(){
 		PLUGIN = this;
+		getServer().getPluginManager().registerEvents(new Listeners(), this);
 	}
 
 }

@@ -38,26 +38,27 @@ public abstract class EventSaver extends Saver {
 	
 	protected abstract Map<String, Object> getValues();
 	protected abstract void set(PlayerEvent event);
-	protected abstract String getEventName();
 	
 	public EventSaver(UUID uuid) {
 		super(ModLogPlugin.EVENT_LOG);
 		UUID = uuid;
-		setSection(getEventName() + "." + uuid.toString());
 	}
 	
 	public void save(PlayerEvent event){
 		Player player = event.getPlayer();
 		Location loc = player.getLocation();
 		InetSocketAddress address = player.getAddress();
-		setSection(event.getEventName() + "." + player.getUniqueId().toString());
 		LocalDateTime dateTime = LocalDateTime.now();
-		set(dateTime.getDayOfMonth() + "/" + dateTime.getMonthValue() + "/" + dateTime.getYear(), DATE);
-		set(dateTime.getHour() + ":" + dateTime.getMinute(), TIME);
-		set(address.getHostName() + ":" + address.getPort(), IP);
+		String dateString = dateTime.getDayOfMonth() + "/" + dateTime.getMonthValue() + "/" + dateTime.getYear();
+		String timeString = dateTime.getHour() + ":" + dateTime.getMinute();
+		String section = event.getEventName() + "." + event.getPlayer().getUniqueId().toString() + "." + dateString + "." + timeString;
+		String[] fix = {section};
+		set(address.getAddress().getHostAddress() + ":" + address.getPort(), fix, IP);
+		setSection(section);
 		set(loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "," + loc.getWorld().getName(), LOCATION);
 		set(player.getGameMode().name(), GAMEMODE);
 		set(event);
+		save();
 	}
 
 	public Map<String, Object> getData(){
