@@ -19,8 +19,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEvent;
 
 import ModLog.ModLogPlugin;
-import ModLog.Logging.Saver;
 import ModLog.Logging.Event.Loggers.TeleportLog;
+
+import TTCore.Savers.Saver;
 
 public abstract class EventSaver extends Saver {
 	

@@ -1,4 +1,5 @@
 name: ModLog
 version: 0.1
 main: ModLog.ModLogPlugin
+depend: [TTCore]
 
